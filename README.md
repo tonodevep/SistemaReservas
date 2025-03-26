@@ -81,7 +81,7 @@ Este proyecto sigue el patrón de diseño **Modelo-Vista-Controlador (MVC)**:
 ## Autores
 Este proyecto ha sido desarrollado por Sara Alonso Perdomo y Juan Antonio "Toño" Tejera González.  
 
-Github Sara: [![Web](https://img.shields.io/badge/GitHub-juniun-14a1f0?style=for-the-badge&logo=github&logoColor=white&labelColor=101010)](https://github.com/juniun/)
+Github Sara: [![Web](https://img.shields.io/badge/GitHub-juniuun-14a1f0?style=for-the-badge&logo=github&logoColor=white&labelColor=101010)](https://github.com/juniuun/)
 
 Github de Toño: [![Web](https://img.shields.io/badge/GitHub-tonodevep-14a1f0?style=for-the-badge&logo=github&logoColor=white&labelColor=101010)](https://github.com/tonodevep/)
 
