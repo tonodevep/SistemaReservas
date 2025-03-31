@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.temporal.ChronoUnit;
+import Modelo.Habitacion;
 
 //Clase Reserva donde se encapsularan los métodos y datos relacionados a las reservas
 public class Reserva {
