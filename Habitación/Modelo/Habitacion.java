@@ -12,8 +12,20 @@ public class Habitacion {
         INDIVIDUAL, // 50€
         DOBLE,      // 80€
         SUITE       // 150€
-    }
 
+        //Campo final que almacena el precio por noche
+        private final double precioPorNoche;
+
+        //Constructor del enum
+        TipoHabitacion(double precioPorNoche){
+            this.precioPorNoche = precioPorNoche;
+        }
+
+        //Getter de precioPorNoche
+        public double getPrecioPorNoche(){
+            return precioPorNoche;
+        }
+    }
 
     //Enum de estado de habitación
     public enum EstadoHabitacion {
@@ -29,6 +41,7 @@ public class Habitacion {
         this.estado = EstadoHabitacion.DISPONIBLE;
         this.descripcion = descripcion;
     }
+
 
     // Getters y Setters
 
