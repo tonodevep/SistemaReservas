@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.temporal.ChronoUnit;
 
 //Clase Reserva donde se encapsularan los métodos y datos relacionados a las reservas
 public class Reserva {
@@ -11,15 +12,22 @@ public class Reserva {
     private List<Habitacion> habitacionReservada;
     private LocalDate checkIn;
     private LocalDate checkOut;
-    private int precioTotal;
+    private double precioTotal;
 
     //Constructor
-    public Reserva(LocalDate checkIn, LocalDate checkOut, int precioTotal){
+    public Reserva(LocalDate checkIn, LocalDate checkOut, double precioTotal){
         this.IDReserva = ++IDReservaCounter;
         this.habitacionReservada = new ArrayList<>();
         this.checkIn = checkIn;
         this.checkOut = checkOut;
-        this.precioTotal = precioTotal;
+        this.precioTotal = calcularPrecioTotal();
+    }
+
+    //Método que calcula el precio total dependiendo el tipo de habitación y la estancia
+    private double calcularPrecioTotal(){
+
+        int noches = ChronoUnit.DAYS.between(checkIn, checkOut);
+        return noches * habitacion.getTipo().getPrecioPorNoche();
     }
 
     //Getters
