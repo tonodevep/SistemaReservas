@@ -1,3 +1,4 @@
+package Modelo;
 
 public class Habitacion {
     private int numero;
@@ -6,23 +7,22 @@ public class Habitacion {
     private EstadoHabitacion estado;
     private String descripcion;
 
-
     //Enum de tipo de habitación
     public enum TipoHabitacion {
-        INDIVIDUAL, // 50€
-        DOBLE,      // 80€
-        SUITE;       // 150€
+        INDIVIDUAL(50.0), // 50€
+        DOBLE(80.0),      // 80€
+        SUITE(150.0);     // 150€
 
         //Campo final que almacena el precio por noche
         private final double precioPorNoche;
 
         //Constructor del enum
-        TipoHabitacion(double precioPorNoche){
+        TipoHabitacion(double precioPorNoche) {
             this.precioPorNoche = precioPorNoche;
         }
 
         //Getter de precioPorNoche
-        public double getPrecioPorNoche(){
+        public double getPrecioPorNoche() {
             return precioPorNoche;
         }
     }
@@ -34,17 +34,15 @@ public class Habitacion {
         OCUPADA
     }
 
-    public Habitacion(int numero, TipoHabitacion tipo, double precio, EstadoHabitacion estado, String descripcion) {
+    public Habitacion(int numero, TipoHabitacion tipo, String descripcion) {
         this.numero = numero;
         this.tipo = tipo;
-        this.precio = precio;
+        this.precio = tipo.getPrecioPorNoche(); // Usamos el precio del tipo de habitación
         this.estado = EstadoHabitacion.DISPONIBLE;
         this.descripcion = descripcion;
     }
 
-
     // Getters y Setters
-
     public int getNumero() {
         return numero;
     }
@@ -59,14 +57,11 @@ public class Habitacion {
 
     public void setTipo(TipoHabitacion tipo) {
         this.tipo = tipo;
+        this.precio = tipo.getPrecioPorNoche(); // Actualizamos el precio cuando cambia el tipo
     }
 
     public double getPrecio() {
         return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
     }
 
     public EstadoHabitacion getEstado() {
@@ -84,8 +79,5 @@ public class Habitacion {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-
 }
-
 
