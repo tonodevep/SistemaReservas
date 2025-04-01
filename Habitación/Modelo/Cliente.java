@@ -9,14 +9,19 @@ public class Cliente {
     private static int IDClienteCounter = 0;
     private int IDCliente;
     private String nombreCliente;
-    private List<Reservas> historialReservas;
-    private static int reservasActivas = 0;
+    private List<Reserva> historialReservas;
+    private final List<Reserva> reservasActivas;
 
     //Constructor
     public Cliente(String nombreCliente, int ID){
         this.IDCliente = ++IDClienteCounter;
         this.nombreCliente = nombreCliente;
         this.historialReservas = new ArrayList<>();
+    }
+
+    //Para establecer el límite de reservas activas
+    public boolean puedeReservar() {
+        return reservasActivas.size() < 3;
     }
 
     //Getters
