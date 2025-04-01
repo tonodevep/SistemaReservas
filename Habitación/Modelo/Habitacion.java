@@ -11,7 +11,7 @@ public class Habitacion {
     public enum TipoHabitacion {
         INDIVIDUAL, // 50€
         DOBLE,      // 80€
-        SUITE       // 150€
+        SUITE;       // 150€
 
         //Campo final que almacena el precio por noche
         private final double precioPorNoche;
