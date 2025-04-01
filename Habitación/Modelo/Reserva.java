@@ -1,3 +1,5 @@
+package Modelo;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +29,8 @@ public class Reserva {
     //Método que calcula el precio total dependiendo el tipo de habitación y la estancia
     private double calcularPrecioTotal(){
 
-        int noches = ChronoUnit.DAYS.between(checkIn, checkOut);
-        return noches * habitacion.getTipo().getPrecioPorNoche();
+        long noches = ChronoUnit.DAYS.between(checkIn, checkOut);
+        return noches * Habitacion.getTipo().getPrecioPorNoche();
     }
 
     //Getters
@@ -48,7 +50,7 @@ public class Reserva {
         return checkOut;
     }
 
-    public int getPrecioTotal() {
+    public double getPrecioTotal() {
         return precioTotal;
     }
 
@@ -66,3 +68,4 @@ public class Reserva {
     }
         
 }
+
