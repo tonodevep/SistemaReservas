@@ -14,7 +14,7 @@ public class ControladorReserva {
         this.reservas = new ArrayList<>();
     }
 
-    public Reserva reservarHabitacion(Habitacion habitacion, Cliente cliente, LocalDate checkIn, LocalDate checkOut) {
+    public Reserva reservarHabitacion(Habitacion habitacion, Cliente cliente, LocalDate checkIn, LocalDate checkOut) throws ReservaNoDisponibleException{
         if (habitacion.getEstado() == EstadoHabitacion.DISPONIBLE) {
             int id = ++IDReservaCounter;
             Reserva nuevaReserva = new Reserva(id, habitacion, cliente, checkIn, checkOut);
@@ -23,7 +23,7 @@ public class ControladorReserva {
             System.out.println("Reserva realizada con éxito. ID de reserva: " + nuevaReserva.getIDReserva());
             return nuevaReserva;
         } else {
-            throw new IllegalArgumentException("La habitación no está disponible actualmente para reserva.");
+            throw new ReservaNoDisponibleException("La habitación no está disponible actualmente para reserva.");
         }
     }
 
