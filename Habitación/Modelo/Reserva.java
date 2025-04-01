@@ -53,14 +53,6 @@ public class Reserva {
     }
 
     //Setters
-    public void setIDReserva(int iDReserva) {
-        IDReserva = iDReserva;
-    }
-
-    public void setHabitacionReservada(List<Habitacion> habitacionReservada) {
-        this.habitacionReservada = habitacionReservada;
-    }
-
     public void setCheckIn(LocalDate checkIn) {
         this.checkIn = checkIn;
     }
