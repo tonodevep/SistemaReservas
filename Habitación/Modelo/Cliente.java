@@ -1,3 +1,5 @@
+package Modelo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,8 @@ public class Cliente {
     private final List<Reserva> reservasActivas;
 
     //Constructor
-    public Cliente(String nombreCliente, int ID){
+    public Cliente(String nombreCliente, int IDCliente, List<Reserva> reservasActivas){
+        this.reservasActivas = reservasActivas;
         this.IDCliente = ++IDClienteCounter;
         this.nombreCliente = nombreCliente;
         this.historialReservas = new ArrayList<>();
@@ -33,7 +36,7 @@ public class Cliente {
         return nombreCliente;
     }
 
-    public List<Reservas> getHistorialReservas() {
+    public List<Reserva> getHistorialReservas() {
         return historialReservas;
     }
     
@@ -50,7 +53,7 @@ public class Cliente {
         this.nombreCliente = nombreCliente;
     }
 
-    public void setHistorialReservas(List<Reservas> historialReservas) {
+    public void setHistorialReservas(List<Reserva> historialReservas) {
         this.historialReservas = historialReservas;
     }
 
