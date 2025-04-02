@@ -1,71 +1,73 @@
+package Vista;
+
+import Controlador.*;
+import Modelo.*;
 import java.util.List;
-import java.util.Scanner;
 
 public class VistaConsola {
-    private Scanner scanner;
-    
-    public VistaConsola() {
-        this.scanner = new Scanner(System.in);
-    }
-    
-    public void mostrarMensaje(String mensaje) {
-        System.out.println(mensaje);
+    private ControladorCliente controladorCliente;
+    private ControladorReserva controladorReserva;
+    private ControladorHabitacion controladorHabitacion;
+
+    public VistaConsola(ControladorCliente controladorCliente, ControladorReserva controladorReserva, ControladorHabitacion controladorHabitacion) {
+        this.controladorCliente = controladorCliente;
+        this.controladorReserva = controladorReserva;
+        this.controladorHabitacion = controladorHabitacion;
     }
 
-    public void mostrarHabitacionesDisponibles(List<Habitacion> habitaciones) {
-        System.out.println("\n=== HABITACIONES DISPONIBLES ===");
-        for (Habitacion habitacion : habitaciones) {
-            if (habitacion.getEstado() == Habitacion.EstadoHabitacion.DISPONIBLE) {
-                System.out.println("Habitación " + habitacion.getNumero() + ": " +
-                        habitacion.getTipo() + " - " +
-                        habitacion.getPrecio() + "€/noche - " +
-                        (habitacion.getDescripcion() != null ? habitacion.getDescripcion() : ""));
+    public void mostrarInfoClientes() {
+        List<Cliente> clientes = controladorCliente.getTodosClientes();
+        System.out.println("\n--- Lista de Clientes ---");
+        for (Cliente cliente : clientes) {
+            System.out.println("ID: " + cliente.getIDCliente() + " | Nombre: " + cliente.getNombre());
+        }
+
+        List<Reserva> reservasActivas = cliente.getReservasActivas();
+        System.out.println("→ Reservas Activas:");
+        if (reservasActivas.isEmpty()) {
+            System.out.println("   No tiene reservas activas.");
+        } else {
+            for (Reserva reserva : reservasActivas) {
+                System.out.println("   ID Reserva: " + reserva.getIDReserva() +
+                        " | Check-in: " + reserva.getCheckIn() +
+                        " | Check-out: " + reserva.getCheckOut() +
+                        " | Precio: " + reserva.getPrecioTotal());
+            }
+        }
+
+        List<Reserva> historial = cliente.getHistorialReservas();
+        System.out.println("→ Historial de Reservas:");
+        if (historial.isEmpty()) {
+            System.out.println("   No tiene reservas pasadas.");
+        } else {
+            for (Reserva reserva : historial) {
+                System.out.println("   ID Reserva: " + reserva.getIDReserva() +
+                        " | Check-in: " + reserva.getCheckIn() +
+                        " | Check-out: " + reserva.getCheckOut() +
+                        " | Precio: " + reserva.getPrecioTotal());
             }
         }
     }
+    }
 
-    public int solicitarNumeroHabitacion() {
-        System.out.print("Ingrese el número de habitación: ");
-        return scanner.nextInt();
+    public void mostrarInfoHabitaciones(List<Habitacion> habitaciones) {
+        System.out.println("\n--- Lista de Habitaciones ---");
+        for (Habitacion habitacion : habitaciones) {
+            System.out.println("Número: " + habitacion.getNumero() +
+                    " | Tipo: " + habitacion.getTipo() +
+                    " | Precio: " + habitacion.getPrecio() +
+                    " | Estado: " + habitacion.getEstado());
+        }
     }
-    
-    public void mostrarMenu(ControladorReserva controlador) {
-        int opcion;
-        do {
-            System.out.println("\n=== MENÚ PRINCIPAL ===");
-            System.out.println("1. Ver habitaciones disponibles");
-            System.out.println("2. Reservar habitación");
-            System.out.println("3. Cancelar reserva");
-            System.out.println("4. Salir");
-            System.out.print("Seleccione una opción: ");
-            opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer
-            
-            switch(opcion) {
-                case 1: 
-                    controlador.mostrarHabitacionesDisponibles(); 
-                    break;
-                case 2: 
-                    mostrarMensaje("Ingrese el número de habitación a reservar:");
-                    int numReserva = solicitarNumeroHabitacion();
-                    controlador.reservarHabitacion(numReserva);
-                    break;
-                case 3:
-                    mostrarMensaje("Ingrese el número de habitación a cancelar:");
-                    int numCancelar = solicitarNumeroHabitacion();
-                    controlador.cancelarReserva(numCancelar);
-                    break;
-                case 4:
-                    mostrarMensaje("Saliendo del sistema...");
-                    break;
-                default:
-                    mostrarMensaje("Opción no válida");
-            }
-        } while(opcion != 4);
-    }
-    
-    public void cerrar() {
-        scanner.close();
+
+    public void mostrarInfoReservas() {
+        System.out.println("\n--- Lista de Reservas ---");
+        for (Reserva reserva : controladorReserva.getReservas()) {
+            System.out.println("ID Reserva: " + reserva.getIDReserva() +
+                    " | Cliente: " + reserva.getCliente().getNombre() +
+                    " | Check-in: " + reserva.getCheckIn() +
+                    " | Check-out: " + reserva.getCheckOut() +
+                    " | Precio Total: " + reserva.getPrecioTotal());
+        }
     }
 }
-
