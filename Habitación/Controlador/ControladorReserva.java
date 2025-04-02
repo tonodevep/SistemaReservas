@@ -24,28 +24,41 @@ public class ControladorReserva {
     public Reserva reservarHabitacion(Habitacion habitacion, Cliente cliente, LocalDate checkIn, LocalDate checkOut) 
     throws ReservaNoDisponibleException {
     
-    // If para verificar el estado de la habitación
-    if (habitacion.getEstado() != EstadoHabitacion.DISPONIBLE) {
-        throw new ReservaNoDisponibleException("La habitación " + habitacion.getNumero() + " no está disponible.");
-    }
-
-    // If para verificar que el cliente no sea nulo
+    // Validación 1: Cliente no nulo
     if (cliente == null) {
-        throw new NullPointerException("Cliente no puede ser nulo.");
+        throw new NullPointerException("Cliente no puede ser nulo");
     }
 
-    // Se crea la reserva
-    int id = ++IDReservaCounter;
-    Reserva nuevaReserva = new Reserva(id, habitacion, cliente, checkIn, checkOut);
-    
-    // Se añade la habitación a la reserva
+    // Validación 2: Límite de reservas
+    if (!cliente.puedeReservar()) {
+        throw new ReservaNoDisponibleException(cliente.getNombreCliente() + " alcanzó el límite de 3 reservas");
+    }
+
+    // Validación 3: Habitación disponible
+    if (habitacion.getEstado() != EstadoHabitacion.DISPONIBLE) {
+        throw new ReservaNoDisponibleException("Habitación " + habitacion.getNumero() + " no disponible");
+    }
+
+    // Creación de la reserva
+    Reserva nuevaReserva = new Reserva(
+        ++IDReservaCounter,
+        habitacion,
+        cliente,
+        checkIn,
+        checkOut
+    );
+
+    // Añadir habitación a la reserva
     nuevaReserva.getHabitacionReservada().add(habitacion);
-    
-    // Actualiza el estado de la habitación
+
+    // Actualizar estados
     habitacion.setEstado(EstadoHabitacion.RESERVADA);
-    
-    // Se guarda la reserva
     reservas.add(nuevaReserva);
+    cliente.getReservasActivas().add(nuevaReserva);
+
+    System.out.println("Reserva: " + nuevaReserva.getIDReserva() + 
+                      " creada para " + cliente.getNombreCliente() +
+                      " (Total: " + cliente.getReservasActivas().size() + "/3)");
     
     return nuevaReserva;
 }
@@ -76,4 +89,3 @@ public class ControladorReserva {
         return null;
     }
 }
-
