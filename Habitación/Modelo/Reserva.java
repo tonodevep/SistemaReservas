@@ -34,7 +34,7 @@ public class Reserva {
     long noches = ChronoUnit.DAYS.between(checkIn, checkOut);
     double precio = 0.0;
     for (Habitacion hab : habitacionReservada) {
-        precio += noches * hab.getTipo().getPrecioPorNoche(); // Usar la instancia 'hab'
+        precio += noches * hab.getTipo().getPrecioPorNoche();
     }
     return precio;
 }
@@ -75,6 +75,5 @@ public class Reserva {
 
     public void setPrecioTotal(double precioTotal) {
         this.precioTotal = precioTotal;
-    }
-        
+    }       
 }
