@@ -5,18 +5,15 @@ import Modelo.*;
 import java.util.List;
 
 public class VistaConsola {
-    //Inicialización de controladores
     private ControladorCliente controladorCliente;
     private ControladorReserva controladorReserva;
     private ControladorHabitacion controladorHabitacion;
 
-    //Constructor
     public VistaConsola(ControladorCliente controladorCliente, ControladorReserva controladorReserva, ControladorHabitacion controladorHabitacion) {
         this.controladorCliente = controladorCliente;
         this.controladorReserva = controladorReserva;
         this.controladorHabitacion = controladorHabitacion;
     }
-
     //Método para mostrar la información de los clientes
     public void mostrarInfoClientes() {
     List<Cliente> clientes = controladorCliente.getTodosClientes();
@@ -25,8 +22,8 @@ public class VistaConsola {
     for (Cliente cliente : clientes) {
         System.out.println("\nID: " + cliente.getIDCliente() + " | Nombre: " + cliente.getNombreCliente());
         
-        // 1. Reservas activas
-        System.out.println("→ Reservas Activas:");
+        // Reservas activas
+        System.out.println("Reservas Activas:");
         List<Reserva> reservasActivas = cliente.getReservasActivas();
         if (reservasActivas.isEmpty()) {
             System.out.println("   No tiene reservas activas.");
@@ -35,7 +32,9 @@ public class VistaConsola {
                 imprimirDetallesReserva(reserva); // Método helper para reutilizar código
             }
         }
-        System.out.println("→ Historial de Reservas:");
+        
+        // 2. Historial de reservas
+        System.out.println("Historial de Reservas:");
         List<Reserva> historial = cliente.getHistorialReservas();
         if (historial.isEmpty()) {
             System.out.println("   No tiene reservas pasadas.");
@@ -46,7 +45,7 @@ public class VistaConsola {
         }
     }
 }
-    //Método para mostrar la información de las reservas
+    //Método para mostrar la información de los detalles de las reservas
     private void imprimirDetallesReserva(Reserva reserva) {
     System.out.println("   ID Reserva: " + reserva.getIDReserva() +
             " | Check-in: " + reserva.getCheckIn() +
@@ -64,7 +63,6 @@ public class VistaConsola {
                     " | Estado: " + habitacion.getEstado());
         }
     }
-
     //Método para mostrar la información de las reservas
     public void mostrarInfoReservas() {
         System.out.println("\n--- Lista de Reservas ---");
